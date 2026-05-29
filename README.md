@@ -132,14 +132,17 @@ Linux C libraries are attached to each [release](https://github.com/MaurerAnton/
 | i686 32-bit | `duct-i386` | `duct-i386-glibc` | `duct-i386-android` |
 | ARM64 (aarch64) | `duct-aarch64` | `duct-aarch64-glibc` | `duct-aarch64-android` |
 | ARM32 hardfloat | `duct-armhf` | `duct-armhf-glibc` | `duct-arm-android` |
-| ARM32 softfloat | `duct-arm` | — | — |
-| RISC-V 64 | `duct-riscv64` | `duct-riscv64-glibc` | — |
-| MIPS 32-bit LE | `duct-mipsel` | — | — |
-| MIPS 32-bit BE | `duct-mips` | — | — |
-| PowerPC 64-bit | `duct-ppc64` | — | — |
-| PowerPC 32-bit | `duct-ppc` | — | — |
-| LoongArch 64 | `duct-loongarch64` | — | — |
-| s390x (IBM Z) | `duct-s390x` | — | — |
+| ARM32 softfloat | `duct-arm` | `duct-arm-glibc` | — |
+| RISC-V 64 | `duct-riscv64` | `duct-riscv64-glibc` | `duct-riscv64-android` |
+| MIPS 32-bit LE | `duct-mipsel` | `duct-mipsel-glibc` | — |
+| MIPS 32-bit BE | `duct-mips` | `duct-mips-glibc` | — |
+| MIPS 64-bit BE | `duct-mips64` | — | — |
+| MIPS 64-bit LE | `duct-mips64el` | — | — |
+| PowerPC 64-bit BE | `duct-ppc64` | `duct-ppc64-glibc` | — |
+| PowerPC 64-bit LE | `duct-ppc64le` | `duct-ppc64le-glibc` | — |
+| PowerPC 32-bit | `duct-ppc` | `duct-ppc-glibc` | — |
+| LoongArch 64 | `duct-loongarch64` | `duct-loongarch64-glibc` | — |
+| s390x (IBM Z) | `duct-s390x` | `duct-s390x-glibc` | — |
 
 musl binaries are statically linked — one file, no dependencies, runs on
 any kernel 2.6+. glibc binaries are dynamically linked and half the size,

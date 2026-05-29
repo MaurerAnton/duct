@@ -34,11 +34,20 @@ jobs:
           - target: mips-linux-musl
             name: duct-mips
             static: true
+          - target: mips64-linux-musl
+            name: duct-mips64
+            static: true
+          - target: mips64el-linux-musl
+            name: duct-mips64el
+            static: true
           - target: powerpc64-linux-musl
             name: duct-ppc64
             static: true
           - target: powerpc-linux-musl
             name: duct-ppc
+            static: true
+          - target: powerpc64le-linux-musl
+            name: duct-ppc64le
             static: true
           - target: loongarch64-linux-musl
             name: duct-loongarch64
@@ -60,8 +69,32 @@ jobs:
           - target: arm-linux-gnueabihf
             name: duct-armhf-glibc
             static: false
+          - target: arm-linux-gnueabi
+            name: duct-arm-glibc
+            static: false
           - target: riscv64-linux-gnu
             name: duct-riscv64-glibc
+            static: false
+          - target: mipsel-linux-gnu
+            name: duct-mipsel-glibc
+            static: false
+          - target: mips-linux-gnu
+            name: duct-mips-glibc
+            static: false
+          - target: powerpc64-linux-gnu
+            name: duct-ppc64-glibc
+            static: false
+          - target: powerpc64le-linux-gnu
+            name: duct-ppc64le-glibc
+            static: false
+          - target: powerpc-linux-gnu
+            name: duct-ppc-glibc
+            static: false
+          - target: loongarch64-linux-gnu
+            name: duct-loongarch64-glibc
+            static: false
+          - target: s390x-linux-gnu
+            name: duct-s390x-glibc
             static: false
 
           # --- Android Bionic ---
@@ -76,6 +109,9 @@ jobs:
             static: true
           - target: i386-linux-android
             name: duct-i386-android
+            static: true
+          - target: riscv64-linux-android
+            name: duct-riscv64-android
             static: true
 
     runs-on: ubuntu-latest
