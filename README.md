@@ -121,6 +121,21 @@ an older libc (glibc, dietlibc, klibc), duct runs on kernels as far back
 as Linux 1.0. The 2.6 constraint is purely about which static libc you
 choose at compile time.
 
+### Prebuilt binaries
+
+Static musl-linked binaries for six targets are attached to each
+[release](https://github.com/MaurerAnton/duct/releases). No glibc
+dependency — one file, runs anywhere on that architecture.
+
+| File | Architecture | Notes |
+|---|---|---|
+| `duct-x86_64` | x86-64 (amd64) | Desktop, server, most VMs |
+| `duct-aarch64` | ARM64 | Raspberry Pi 3/4/5, Apple Silicon, AWS Graviton |
+| `duct-armhf` | ARM 32-bit hardfloat | Raspberry Pi 0/1/2, old ARM boards |
+| `duct-riscv64` | RISC-V 64-bit | SiFive, StarFive, Milk-V |
+| `duct-i386` | i686 32-bit | Ancient x86, thin clients, embedded |
+| `duct-x86_64-glibc` | x86-64 glibc dynamic | Smallest x86-64 binary (~8 KB) — links system glibc |
+
 ---
 
 ## Integration examples

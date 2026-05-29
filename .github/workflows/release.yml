@@ -1,0 +1,54 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-linux-musl
+            name: duct-x86_64
+          - target: aarch64-linux-musl
+            name: duct-aarch64
+          - target: arm-linux-musleabihf
+            name: duct-armhf
+          - target: riscv64-linux-musl
+            name: duct-riscv64
+          - target: i386-linux-musl
+            name: duct-i386
+          - target: x86_64-linux-gnu
+            name: duct-x86_64-glibc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.13.0
+      - run: |
+          zig cc -target ${{ matrix.target }} -O2 -static -s -o ${{ matrix.name }} duct.c
+          strip ${{ matrix.name }} || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: ${{ matrix.name }}
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: binaries
+          merge-multiple: true
+      - run: |
+          cd binaries
+          sha256sum * > SHA256SUMS
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: binaries/*
+          generate_release_notes: true
