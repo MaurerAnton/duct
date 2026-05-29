@@ -135,6 +135,10 @@ dependency — one file, runs anywhere on that architecture.
 | `duct-riscv64` | RISC-V 64-bit | SiFive, StarFive, Milk-V |
 | `duct-i386` | i686 32-bit | Ancient x86, thin clients, embedded |
 | `duct-x86_64-glibc` | x86-64 glibc dynamic | Smallest x86-64 binary (~8 KB) — links system glibc |
+| `duct-i386-glibc` | i686 glibc dynamic | Smallest 32-bit binary (~7 KB) — links system glibc |
+| `duct-aarch64-android` | ARM64 Android | Bionic libc, Termux on modern phones |
+| `duct-arm-android` | ARM 32-bit Android | Bionic libc, old Android devices |
+| `duct-x86_64-android` | x86-64 Android | Bionic libc, ChromeOS, Android emulator |
 
 ---
 
