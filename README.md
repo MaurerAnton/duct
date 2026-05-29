@@ -105,6 +105,13 @@ musl-gcc -O2 -static -s -o duct duct.c
 
 Result: ~12 KB, runs on any Linux kernel 2.6+.
 
+The 2.6 floor is set by musl libc, not by duct itself. duct uses only
+seven POSIX syscalls — `socket`, `bind`, `listen`, `accept`, `connect`,
+`read`, `write` — all of which exist since Linux 1.0. If you link against
+an older libc (glibc, dietlibc, klibc), duct runs on kernels as far back
+as Linux 1.0. The 2.6 constraint is purely about which static libc you
+choose at compile time.
+
 ---
 
 ## Integration examples
