@@ -95,7 +95,13 @@ A duct is the simplest possible conduit — a hollow tube that moves something f
 cc -O2 -s -o duct duct.c
 ```
 
-That's it. No `./configure`, no `cmake`, no `Makefile`. GCC, Clang, tcc, cproc, cosmocc — any C99 compiler works.
+That's it. No `./configure`, no `cmake`, no `Makefile`. Any C89 (ANSI C) compiler
+works — GCC, Clang, tcc, cproc, cosmocc, and vendor compilers from the 1990s.
+
+The code avoids all C99-specific features: no designated initializers, no
+`//` comments, no mixed declarations and statements, no `dprintf`. Every
+function used — `socket`, `bind`, `listen`, `accept`, `connect`, `read`,
+`write`, `open`, `memset`, `fprintf` — is ANSI C or POSIX.1.
 
 Statically linked with musl for a truly portable binary:
 

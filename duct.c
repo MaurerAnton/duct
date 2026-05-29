@@ -11,15 +11,17 @@ int main(int argc, char **argv) {
   int s, fd;
   ssize_t n;
   unsigned char buf[BUFSZ];
-  struct sockaddr_in addr = {.sin_family = AF_INET};
+  struct sockaddr_in addr;
 
   if (argc < 2 || argc > 4) {
-    dprintf(2, "usage: duct port            (receive to stdout)\n"
-               "       duct host port       (send from stdin)\n"
-               "       duct host port file  (send from file)\n");
+    fprintf(stderr, "usage: duct port            (receive to stdout)\n"
+                    "       duct host port       (send from stdin)\n"
+                    "       duct host port file  (send from file)\n");
     return 1;
   }
 
+  memset(&addr, 0, sizeof(addr));
+  addr.sin_family = AF_INET;
   s = socket(AF_INET, SOCK_STREAM, 0);
 
   if (argc == 2) {
