@@ -123,22 +123,28 @@ choose at compile time.
 
 ### Prebuilt binaries
 
-Static musl-linked binaries for six targets are attached to each
-[release](https://github.com/MaurerAnton/duct/releases). No glibc
-dependency — one file, runs anywhere on that architecture.
+Static and dynamic binaries for every major architecture and all three
+Linux C libraries are attached to each [release](https://github.com/MaurerAnton/duct/releases).
 
-| File | Architecture | Notes |
-|---|---|---|
-| `duct-x86_64` | x86-64 (amd64) | Desktop, server, most VMs |
-| `duct-aarch64` | ARM64 | Raspberry Pi 3/4/5, Apple Silicon, AWS Graviton |
-| `duct-armhf` | ARM 32-bit hardfloat | Raspberry Pi 0/1/2, old ARM boards |
-| `duct-riscv64` | RISC-V 64-bit | SiFive, StarFive, Milk-V |
-| `duct-i386` | i686 32-bit | Ancient x86, thin clients, embedded |
-| `duct-x86_64-glibc` | x86-64 glibc dynamic | Smallest x86-64 binary (~8 KB) — links system glibc |
-| `duct-i386-glibc` | i686 glibc dynamic | Smallest 32-bit binary (~7 KB) — links system glibc |
-| `duct-aarch64-android` | ARM64 Android | Bionic libc, Termux on modern phones |
-| `duct-arm-android` | ARM 32-bit Android | Bionic libc, old Android devices |
-| `duct-x86_64-android` | x86-64 Android | Bionic libc, ChromeOS, Android emulator |
+| Architecture | musl (static) | glibc (dynamic) | Android (Bionic) |
+|---|---|---|---|
+| x86-64 (amd64) | `duct-x86_64` | `duct-x86_64-glibc` | `duct-x86_64-android` |
+| i686 32-bit | `duct-i386` | `duct-i386-glibc` | `duct-i386-android` |
+| ARM64 (aarch64) | `duct-aarch64` | `duct-aarch64-glibc` | `duct-aarch64-android` |
+| ARM32 hardfloat | `duct-armhf` | `duct-armhf-glibc` | `duct-arm-android` |
+| ARM32 softfloat | `duct-arm` | — | — |
+| RISC-V 64 | `duct-riscv64` | `duct-riscv64-glibc` | — |
+| MIPS 32-bit LE | `duct-mipsel` | — | — |
+| MIPS 32-bit BE | `duct-mips` | — | — |
+| PowerPC 64-bit | `duct-ppc64` | — | — |
+| PowerPC 32-bit | `duct-ppc` | — | — |
+| LoongArch 64 | `duct-loongarch64` | — | — |
+| s390x (IBM Z) | `duct-s390x` | — | — |
+
+musl binaries are statically linked — one file, no dependencies, runs on
+any kernel 2.6+. glibc binaries are dynamically linked and half the size,
+but require a matching glibc version on the target. Android binaries link
+against Bionic and work in Termux and on rooted devices.
 
 ---
 

@@ -9,8 +9,12 @@ jobs:
     strategy:
       matrix:
         include:
+          # --- musl static (most portable) ---
           - target: x86_64-linux-musl
             name: duct-x86_64
+            static: true
+          - target: i386-linux-musl
+            name: duct-i386
             static: true
           - target: aarch64-linux-musl
             name: duct-aarch64
@@ -18,18 +22,49 @@ jobs:
           - target: arm-linux-musleabihf
             name: duct-armhf
             static: true
+          - target: arm-linux-musleabi
+            name: duct-arm
+            static: true
           - target: riscv64-linux-musl
             name: duct-riscv64
             static: true
-          - target: i386-linux-musl
-            name: duct-i386
+          - target: mipsel-linux-musl
+            name: duct-mipsel
             static: true
+          - target: mips-linux-musl
+            name: duct-mips
+            static: true
+          - target: powerpc64-linux-musl
+            name: duct-ppc64
+            static: true
+          - target: powerpc-linux-musl
+            name: duct-ppc
+            static: true
+          - target: loongarch64-linux-musl
+            name: duct-loongarch64
+            static: true
+          - target: s390x-linux-musl
+            name: duct-s390x
+            static: true
+
+          # --- glibc dynamic (smallest per-arch) ---
           - target: x86_64-linux-gnu
             name: duct-x86_64-glibc
             static: false
           - target: i386-linux-gnu
             name: duct-i386-glibc
             static: false
+          - target: aarch64-linux-gnu
+            name: duct-aarch64-glibc
+            static: false
+          - target: arm-linux-gnueabihf
+            name: duct-armhf-glibc
+            static: false
+          - target: riscv64-linux-gnu
+            name: duct-riscv64-glibc
+            static: false
+
+          # --- Android Bionic ---
           - target: aarch64-linux-android
             name: duct-aarch64-android
             static: true
@@ -39,6 +74,10 @@ jobs:
           - target: x86_64-linux-android
             name: duct-x86_64-android
             static: true
+          - target: i386-linux-android
+            name: duct-i386-android
+            static: true
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
