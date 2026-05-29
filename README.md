@@ -202,4 +202,7 @@ duct 10.0.0.5 9999 < video.mkv   # sender
 
 ## License
 
-MIT. One file. Take it anywhere.
+GNU General Public License v3.0 or any later version. See [LICENSE](LICENSE).
+
+duct is free software. Share it, modify it, redistribute it — just keep the
+license intact and pass the same freedoms on to your users.
