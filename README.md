@@ -123,31 +123,29 @@ choose at compile time.
 
 ### Prebuilt binaries
 
-Static and dynamic binaries for every major architecture and all three
-Linux C libraries are attached to each [release](https://github.com/MaurerAnton/duct/releases).
+Static and dynamic binaries for 14 architectures are attached to each
+[release](https://github.com/MaurerAnton/duct/releases). Built with
+zig 0.13.0.
 
-| Architecture | musl (static) | glibc (dynamic) | Android (Bionic) |
-|---|---|---|---|
-| x86-64 (amd64) | `duct-x86_64` | `duct-x86_64-glibc` | `duct-x86_64-android` |
-| i686 32-bit | `duct-i386` | `duct-i386-glibc` | `duct-i386-android` |
-| ARM64 (aarch64) | `duct-aarch64` | `duct-aarch64-glibc` | `duct-aarch64-android` |
-| ARM32 hardfloat | `duct-armhf` | `duct-armhf-glibc` | `duct-arm-android` |
-| ARM32 softfloat | `duct-arm` | `duct-arm-glibc` | — |
-| RISC-V 64 | `duct-riscv64` | `duct-riscv64-glibc` | `duct-riscv64-android` |
-| MIPS 32-bit LE | `duct-mipsel` | `duct-mipsel-glibc` | — |
-| MIPS 32-bit BE | `duct-mips` | `duct-mips-glibc` | — |
-| MIPS 64-bit BE | `duct-mips64` | — | — |
-| MIPS 64-bit LE | `duct-mips64el` | — | — |
-| PowerPC 64-bit BE | `duct-ppc64` | `duct-ppc64-glibc` | — |
-| PowerPC 64-bit LE | `duct-ppc64le` | `duct-ppc64le-glibc` | — |
-| PowerPC 32-bit | `duct-ppc` | `duct-ppc-glibc` | — |
-| LoongArch 64 | `duct-loongarch64` | `duct-loongarch64-glibc` | — |
-| s390x (IBM Z) | `duct-s390x` | `duct-s390x-glibc` | — |
+| Architecture | musl (static) | glibc (dynamic) |
+|---|---|---|
+| x86-64 (amd64) | `duct-x86_64` | `duct-x86_64-glibc` |
+| i686 32-bit | `duct-i386` | `duct-i386-glibc` |
+| ARM64 (aarch64) | `duct-aarch64` | `duct-aarch64-glibc` |
+| ARM32 hardfloat | `duct-armhf` | `duct-armhf-glibc` |
+| ARM32 softfloat | `duct-arm` | `duct-arm-glibc` |
+| RISC-V 64 | `duct-riscv64` | — |
+| MIPS 32-bit LE | `duct-mipsel` | `duct-mipsel-glibc` |
+| MIPS 32-bit BE | `duct-mips` | `duct-mips-glibc` |
+| MIPS 64-bit BE | `duct-mips64` | — |
+| MIPS 64-bit LE | `duct-mips64el` | — |
+| PowerPC 64-bit BE | `duct-ppc64` | `duct-ppc64-glibc` |
+| PowerPC 64-bit LE | `duct-ppc64le` | `duct-ppc64le-glibc` |
+| PowerPC 32-bit | `duct-ppc` | — |
 
 musl binaries are statically linked — one file, no dependencies, runs on
 any kernel 2.6+. glibc binaries are dynamically linked and half the size,
-but require a matching glibc version on the target. Android binaries link
-against Bionic and work in Termux and on rooted devices.
+but require a matching glibc version on the target.
 
 ---
 
