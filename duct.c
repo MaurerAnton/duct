@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
   } else {
     /* send mode: connect to host:port, read from stdin or file */
     addr.sin_port = htons(atoi(argv[2]));
-    inet_pton(AF_INET, argv[1], &addr.sin_addr);
+    addr.sin_addr.s_addr = inet_addr(argv[1]);
     connect(s, (struct sockaddr *)&addr, sizeof(addr));
     if (argc == 4)
       fd = open(argv[3], O_RDONLY);

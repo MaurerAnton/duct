@@ -98,13 +98,14 @@ cc -O2 -s -o duct duct.c
 That's it. No `./configure`, no `cmake`, no `Makefile`. Any C89 (ANSI C) compiler
 works — GCC, Clang, tcc, cproc, cosmocc, and vendor compilers from the 1990s.
 
-Two C99 features were deliberately avoided to maintain C89 compatibility:
-designated initializers (`.sin_family = AF_INET` → `memset` +
-explicit field assignment) and `dprintf` (→ `fprintf` to `stderr`).
+Three features newer than C89/POSIX.1-1990 were deliberately avoided:
+(1) designated initializers (`.sin_family = AF_INET` → `memset` +
+explicit field assignment), (2) `inet_pton` (POSIX.1-2001 → `inet_addr`,
+POSIX.1-1990), and (3) `dprintf` (C99 → `fprintf` to `stderr`).
 All declarations sit at the top of `main` — no mixed declarations and
 statements. Every function used — `socket`, `bind`, `listen`, `accept`,
-`connect`, `read`, `write`, `open`, `memset`, `fprintf` — is ANSI C
-or POSIX.1-1990.
+`connect`, `read`, `write`, `open`, `close`, `memset`, `atoi`, `htons`,
+`inet_addr`, `fprintf` — is ANSI C or POSIX.1-1990.
 
 Statically linked with musl for a truly portable binary:
 
