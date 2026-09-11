@@ -1,0 +1,48 @@
+name: verify
+
+# Fast verification on every push/PR: strict C89 build, loopback smoke
+# test, and a static musl build + smoke test. The full 22-target release
+# matrix runs in release.yml on version tags.
+on:
+  push:
+    branches: [ master, next ]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: C89 strict check
+        run: gcc -std=c89 -pedantic -Wall -Wextra -fsyntax-only duct.c
+
+      - name: Host build
+        run: cc -O2 -s -o duct duct.c && ls -la duct
+
+      - name: Loopback smoke test (1 MB random, byte-identical)
+        run: |
+          head -c 1000000 /dev/urandom > payload.bin
+          timeout 20 ./duct 19876 > received.bin &
+          RX=$!
+          sleep 1
+          ./duct 127.0.0.1 19876 payload.bin
+          wait $RX
+          cmp payload.bin received.bin && echo "SMOKE OK"
+
+      - uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.13.0
+
+      - name: Static musl build (x86_64) + smoke test
+        run: |
+          zig cc -target x86_64-linux-musl -O2 -s -static -o duct-static duct.c
+          file duct-static
+          head -c 100000 /dev/urandom > payload2.bin
+          timeout 20 ./duct-static 19877 > received2.bin &
+          RX=$!
+          sleep 1
+          ./duct-static 127.0.0.1 19877 payload2.bin
+          wait $RX
+          cmp payload2.bin received2.bin && echo "STATIC SMOKE OK"
