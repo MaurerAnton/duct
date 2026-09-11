@@ -87,7 +87,7 @@ jobs:
           version: 0.13.0
       - run: |
           flags="-target ${{ matrix.target }} -O2 -s"
-          ${{ matrix.static }} && flags="$flags -static"
+          if [ "${{ matrix.static }}" = "true" ]; then flags="$flags -static"; fi
           zig cc $flags -o ${{ matrix.name }} duct.c
           strip ${{ matrix.name }} || true
       - uses: actions/upload-artifact@v4
